@@ -35,6 +35,7 @@ const followersArray = [];
     <h3 class="name">{users name}</h3>
     <p class="username">{users user name}</p>
     <p>Location: {users location}</p>
+
     <p>Profile:  
       <a href={address to users github page}>{address to users github page}</a>
     </p>
@@ -58,13 +59,42 @@ cardCreator = obj => {
   cardinfoDiv.classList.add('div.card-info');
   cardDiv.append(cardinfoDiv);
 
-  const cardTitle = document.createElement('h3');
-  cardTitle.classList.add("name")
-  cardTitle.textContent = obj.login
+  const screenName = document.createElement('h3');
+  screenName .classList.add("name")
+  screenName .textContent = obj.login
   cardinfoDiv.append(cardTitle);
 
+  const userName = document.createElement('p');
+  userName.classList.add("username")
+  userName.textContent = obj.name
+  cardinfoDiv.append(userName);
+
+  const userLocation = document.createElement('p');
+  userLocation.textContent = obj.location
+  cardinfoDiv.append(userLocation);
+
+  const userProfile = document.createElement('p');
+  userProfile.textContent = obj.html_url
+  cardinfoDiv.append(userProfile);
+
+  const userFollowers = document.createElement('p');
+  userFollowers.textContent = obj.followers
+  cardinfoDiv.append(userFollowers);
+
+  const userFollowing = document.createElement('p');
+  userFollowing.textContent = obj.following
+  cardinfoDiv.append(userFollowing);
+
+  const userBio = document.createElement('p');
+  userBio.textContent = obj.bio
+  cardinfoDiv.append(userBio);
+
+  return cardDiv;
 
 }
+
+
+
 
 /* List of LS Instructors Github username's: 
   tetondan
@@ -73,17 +103,49 @@ cardCreator = obj => {
   luishrd
   bigknell
 */
-
+/*
 axios.get('https://api.github.com/users/imriven')
     .then( response => {
         // deal with the response data in here
-        console.log(response)
+        //console.log(response)
+        response.data.message.forEach(x => )
     })
     .catch( err => {
         // deal with the error in here
-        console.log(error)
+        console.log("There's an error", error)
     })
 
 
-
-
+const myData = {
+  "login": "imriven",
+  "id": 16640631,
+  "node_id": "MDQ6VXNlcjE2NjQwNjMx",
+  "avatar_url": "https://avatars3.githubusercontent.com/u/16640631?v=4",
+  "gravatar_id": "",
+  "url": "https://api.github.com/users/imriven",
+  "html_url": "https://github.com/imriven",
+  "followers_url": "https://api.github.com/users/imriven/followers",
+  "following_url": "https://api.github.com/users/imriven/following{/other_user}",
+  "gists_url": "https://api.github.com/users/imriven/gists{/gist_id}",
+  "starred_url": "https://api.github.com/users/imriven/starred{/owner}{/repo}",
+  "subscriptions_url": "https://api.github.com/users/imriven/subscriptions",
+  "organizations_url": "https://api.github.com/users/imriven/orgs",
+  "repos_url": "https://api.github.com/users/imriven/repos",
+  "events_url": "https://api.github.com/users/imriven/events{/privacy}",
+  "received_events_url": "https://api.github.com/users/imriven/received_events",
+  "type": "User",
+  "site_admin": false,
+  "name": "christina smith",
+  "company": "Christina The Designer LLC",
+  "blog": "https://christinaharris.design/",
+  "location": "Seattle WA",
+  "email": null,
+  "hireable": null,
+  "bio": "Earned my BA in Graphic Design from Massachusetts College of Art and Design. ",
+  "public_repos": 45,
+  "public_gists": 4,
+  "followers": 3,
+  "following": 2,
+  "created_at": "2016-01-11T02:24:25Z",
+  "updated_at": "2020-03-12T14:39:28Z"
+}
