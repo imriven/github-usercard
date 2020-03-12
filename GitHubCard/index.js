@@ -48,11 +48,11 @@ const followersArray = [];
 */
 
 cardCreator = obj => {
-  const cardDiv = document.createElement('div.card');
+  const cardDiv = document.createElement('div');
   cardDiv.classList.add('card');
 
   const userImg = document.createElement('img');
-  userImg.setAttribute("src", obj.avatar.url) =  
+  userImg.setAttribute("src", obj.avatar_url) 
   cardDiv.append(userImg);
   
   const cardinfoDiv = document.createElement('div');
@@ -61,28 +61,28 @@ cardCreator = obj => {
 
   const screenName = document.createElement('h3');
   screenName .classList.add("name")
-  screenName .textContent = obj.login
-  cardinfoDiv.append(cardTitle);
+  screenName .textContent =obj.name
+  cardinfoDiv.append(screenName);
 
   const userName = document.createElement('p');
   userName.classList.add("username")
-  userName.textContent = obj.name
+  userName.textContent = obj.login
   cardinfoDiv.append(userName);
 
   const userLocation = document.createElement('p');
-  userLocation.textContent = obj.location
+  userLocation.textContent = `Location: ${obj.location}`
   cardinfoDiv.append(userLocation);
 
   const userProfile = document.createElement('p');
-  userProfile.textContent = obj.html_url
+  userProfile.textContent = `Profile: ${obj.html_url}`
   cardinfoDiv.append(userProfile);
 
   const userFollowers = document.createElement('p');
-  userFollowers.textContent = obj.followers
+  userFollowers.textContent = `Follwers: ${obj.followers}`
   cardinfoDiv.append(userFollowers);
 
   const userFollowing = document.createElement('p');
-  userFollowing.textContent = obj.following
+  userFollowing.textContent = `Following: ${obj.following}`
   cardinfoDiv.append(userFollowing);
 
   const userBio = document.createElement('p');
@@ -92,6 +92,8 @@ cardCreator = obj => {
   return cardDiv;
 
 }
+
+let cardsParent = document.querySelector("div.cards");
 
 
 
@@ -103,18 +105,19 @@ cardCreator = obj => {
   luishrd
   bigknell
 */
+
 /*
 axios.get('https://api.github.com/users/imriven')
     .then( response => {
         // deal with the response data in here
         //console.log(response)
-        response.data.message.forEach(x => )
+        cardsParent.appendChild(cardCreator(response.data))
     })
     .catch( err => {
         // deal with the error in here
-        console.log("There's an error", error)
+        console.log("There's an error", err)
     })
-
+*/
 
 const myData = {
   "login": "imriven",
@@ -149,3 +152,5 @@ const myData = {
   "created_at": "2016-01-11T02:24:25Z",
   "updated_at": "2020-03-12T14:39:28Z"
 }
+
+cardsParent.appendChild(cardCreator(myData))
