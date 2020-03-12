@@ -60,8 +60,8 @@ cardCreator = obj => {
   cardDiv.append(cardinfoDiv);
 
   const screenName = document.createElement('h3');
-  screenName .classList.add("name")
-  screenName .textContent =obj.name
+  screenName.classList.add("name")
+  screenName.textContent = obj.name
   cardinfoDiv.append(screenName);
 
   const userName = document.createElement('p');
@@ -74,11 +74,18 @@ cardCreator = obj => {
   cardinfoDiv.append(userLocation);
 
   const userProfile = document.createElement('p');
-  userProfile.textContent = `Profile: ${obj.html_url}`
+  userProfile.textContent = `Profile:`
   cardinfoDiv.append(userProfile);
 
+  const userLink = document.createElement('a');
+  userLink.setAttribute("href", obj.html_url)
+  userLink.setAttribute("target", "_blank")
+  userLink.textContent = `GitHub Profile`
+  userProfile.append(userLink)
+
+
   const userFollowers = document.createElement('p');
-  userFollowers.textContent = `Follwers: ${obj.followers}`
+  userFollowers.textContent = `Followers: ${obj.followers}`
   cardinfoDiv.append(userFollowers);
 
   const userFollowing = document.createElement('p');
@@ -106,19 +113,28 @@ let cardsParent = document.querySelector("div.cards");
   bigknell
 */
 
-/*
+
 axios.get('https://api.github.com/users/imriven')
     .then( response => {
         // deal with the response data in here
-        //console.log(response)
+        console.log(response)
         cardsParent.appendChild(cardCreator(response.data))
     })
     .catch( err => {
         // deal with the error in here
         console.log("There's an error", err)
     })
-*/
 
+axios.get("https://api.github.com/users/imriven/followers")
+    .then(response => {
+      console.log(response)
+       response.data.forEach(person => cardsParent.appendChild(cardCreator(person)))
+    })
+    .catch(err => console.log("There's an error", err
+    ))
+
+
+/*
 const myData = {
   "login": "imriven",
   "id": 16640631,
@@ -154,3 +170,5 @@ const myData = {
 }
 
 cardsParent.appendChild(cardCreator(myData))
+
+*/
