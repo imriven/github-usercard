@@ -46,6 +46,26 @@ const followersArray = [];
 
 */
 
+cardCreator = obj => {
+  const cardDiv = document.createElement('div.card');
+  cardDiv.classList.add('card');
+
+  const userImg = document.createElement('img');
+  userImg.setAttribute("src", obj.avatar.url) =  
+  cardDiv.append(userImg);
+  
+  const cardinfoDiv = document.createElement('div');
+  cardinfoDiv.classList.add('div.card-info');
+  cardDiv.append(cardinfoDiv);
+
+  const cardTitle = document.createElement('h3');
+  cardTitle.classList.add("name")
+  cardTitle.textContent = obj.login
+  cardinfoDiv.append(cardTitle);
+
+
+}
+
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
@@ -53,3 +73,17 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+axios.get('https://api.github.com/users/imriven')
+    .then( response => {
+        // deal with the response data in here
+        console.log(response)
+    })
+    .catch( err => {
+        // deal with the error in here
+        console.log(error)
+    })
+
+
+
+
