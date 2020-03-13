@@ -128,7 +128,12 @@ axios.get('https://api.github.com/users/imriven')
 axios.get("https://api.github.com/users/imriven/followers")
     .then(response => {
       console.log(response)
-       response.data.forEach(person => cardsParent.appendChild(cardCreator(person)))
+       response.data.forEach(person => {
+         axios.get(`https://api.github.com/users/${person.login}`)
+         .then(res => {
+          cardsParent.appendChild(cardCreator(res.data))
+         })
+        })
     })
     .catch(err => console.log("There's an error", err
     ))
